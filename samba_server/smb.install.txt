@@ -1,0 +1,38 @@
+1. Install Raspberry pi 5 on micro SD card.
+2. Insert the SD card and power up raspberry pi 5 
+3. Find IP address of the Raspberry pi 5 using either the console 
+4. ssh <user>@<ip_of_raspberry_pi>
+
+	sudo apt update
+	sudo apt upgrade
+	sudo apt install iptables
+	sudo apt install samba samba-common-bin samba-vfs-modules
+	sudo vi /etc/samba/smb.conf
+	## in [global] added teh following
+	    # Copied from Internet - https://discussions.apple.com/thread/252772242?sortBy=rank
+	       fruit:nfs_aces = no
+	       fruit:aapl = yes
+	       vfs objects = catia fruit streams_xattr
+	
+	## Under Share Definitions added the following
+	[Shared]
+	   path = /media/<user>/smb-4tb
+	   writeable = yes
+	   browseable = yes
+	   public = yes 
+	   Valid users = <user>
+	   force user = <user>
+	   force group = <user>
+	   read only = no
+	   create mask = 0664
+	   directory mask = 0777
+	   force create mask = 0664
+	
+	sudo smbpasswd -a <user>
+	sudo systemctl restart smbd
+	sudo reboot # Recommended, but not necessary
+	
+	#https://discussions.apple.com/thread/254890042?sortBy=rank
+	* On the iphone while copying phones, need to click on Options, pick 'Most Compatible' (instead of automatic). This will copy the images/movies.
+	* In my observation, it is still not able to transfer screenshots onto a samba/smb server. Need to look for a solution. For now, air drop is an option.
+	# https://discussions.apple.com/thread/253229205
