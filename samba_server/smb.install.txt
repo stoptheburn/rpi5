@@ -14,7 +14,8 @@
 	       fruit:aapl = yes
 	       vfs objects = catia fruit streams_xattr
 	
-	## Under Share Definitions added the following
+	## the connected seagate 4tb external hdd was mounted on /media/<user>/smb-4tb directory
+	## In order to share/export this volume, under Share Definitions added the following
 	[Shared]
 	   path = /media/<user>/smb-4tb
 	   writeable = yes
